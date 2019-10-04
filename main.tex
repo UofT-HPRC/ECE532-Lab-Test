@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{upgreek}
+\usepackage{url}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[
+backend=biber,
+style=ieee,
+sorting=none
+]{biblatex}
+ 
+\addbibresource{assign.bib}
+
+\title{ECE532S Digital Systems Design \\ \vspace{0.4cm}
+       \Large Lab Test 1 Description - Individual Project \\ \vspace{0.4cm}
+       \small Last Updated: July, 2019}
+\author{ }
+\date{ }
+
+\begin{document}
+\maketitle
+\vspace{-1cm}
+
+The purpose of this test is to show that you have mastered some of the basics of using Vivado. In advance of
+the test you should prepare the following two tasks. Although you may work on these tasks as a group, each
+person in the group should be prepared to demonstrate and answer questions about any part of any of these
+tasks. Individual grades will be assigned based on your familiarity with the tasks and on three questions that
+each of you will be asked. The questions will come from what you did and learned in the tutorials, from the
+tasks described below and basic Verilog (HDL) programming.
+
+This is worth 10\% of your final grade. If you do not have this exercise prepared in advance, you will be
+assigned a grade of 0\%. Please ensure that you have signed up for a demo time slot. Contact your TA if you
+do not have one yet or do not remember your time.
+
+
+
+\section{Microblaze System}
+Build a MicroBlaze system that writes a 32-bit value to the base address of an AXI BRAM memory
+and then reads the value back for display in hexadecimal on the eight 7-segment displays of the
+Nexys4 DDR board. You will need to consult the Nexys4 DDR manual to learn how the displays
+work. When constructing the block design, constrain the pins manually without the board files as you
+did in the first MicroBlaze tutorial. You may use a GPIO to connect to the displays.
+
+\section{Simple Module and Simulation}
+Build a module using the HDL of your choice that inputs a stream of 4-bit numbers and outputs the
+largest of the numbers currently input. Assume all numbers are positive integers.
+The block has the following ports:
+\\
+
+\textbf{clk (input)} the clock
+
+\textbf{reset\_b (input)} an active low reset signal
+
+\textbf{InputValid (input)} value at data input is valid
+
+\textbf{DataInput[3:0] (input)} data input
+
+\textbf{Largest[3:0] (output)} the largest of the input values so far
+
+\noindent
+The block operates as follows:
+
+\begin{enumerate}
+    \item The \textbf{reset\_b} signal is set to 0 for a few cycles to reset the state ma
+    \noindentchine.
+    \item On a positive clock edge, if \textbf{InputValid} is true, then \textbf{DataInput[3:0]} has the next valid input.
+    \item The output \textbf{Largest[3:0]} is 0 after reset and then shows the largest of the numbers that have been input so far. This output changes one cycle after the corresponding number has been input.
+    \item The circuit continues to operate until a reset.
+\end{enumerate}
+
+\noindent
+Your task is to:
+
+\begin{enumerate}
+    \item Simulate this block using the Vivado simulator, or Modelsim. Note that Modelsim will require some extra configuration.
+    \item Demonstrate the use of a simple test bench using your HDL that exercises your module.
+    \item Develop enough tests to convince someone that your circuit is working.
+    \item Show the results of some tests with a waveform viewer.
+    \item Use Vivado to synthesize the block and show that it can synthesize without errors. You do not need to actually load a chip and show this working on the hardware.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+% EXTRA: Use this to build polynomial system
+% EXTRA: Consider timing
+\newpage
+\printbibliography
+
+\end{document}
